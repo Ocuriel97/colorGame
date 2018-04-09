@@ -4,9 +4,20 @@ let squares = document.querySelectorAll('.square');
 let colorDisplay = document.getElementById('colorDisplay');
 let msg = document.querySelector('#msg');
 let header = document.querySelector('h1');
+let resetButton = document.querySelector('#reset');
 let pickedColor = pickColor();
 
 colorDisplay.textContent = pickedColor;
+
+resetButton.addEventListener('click', function () {
+  colors = genColors(6);
+  pickedColor = pickColor();
+  colorDisplay.textContent = pickedColor;
+  for (let i = 0; i < squares.length; i++) {
+    squares[i].style.backgroundColor = colors[i];
+  }
+  header.style.backgroundColor = '#232323';
+});
 
 for (var i = 0; i < colors.length; i++) {
   squares[i].style.backgroundColor = colors[i];
@@ -14,6 +25,7 @@ for (var i = 0; i < colors.length; i++) {
     let clickedColor = this.style.backgroundColor;
     if (clickedColor === pickedColor) {
       msg.textContent = 'Correct!';
+      resetButton.textContent = "Play Again?";
       changeColor(clickedColor);
       header.style.backgroundColor = pickedColor;
     } else {
