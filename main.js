@@ -8,47 +8,40 @@ let header = document.querySelector('h1');
 let resetButton = document.querySelector('#reset');
 let easyBtn = document.querySelector('#easyBtn');
 let hardBtn = document.querySelector('#hardBtn');
+let modeBtns = document.querySelectorAll('.mode');
 let pickedColor = pickColor();
 
-easyBtn.addEventListener('click', function () {
-  hardBtn.classList.remove('selected');
-  easyBtn.classList.add('selected');
-  numSquares = 3;
+for (let i = 0; i < modeBtns.length; i++) {
+  modeBtns[i].addEventListener('click', function () {
+    modeBtns[0].classList.remove('selected');
+    modeBtns[1].classList.remove('selected');
+    this.classList.add('selected');
+    this.textContent === 'EASY' ? numSquares = 3: numSquares = 6;
+    reset();
+  });
+}
+
+function reset () {
   colors = genColors(numSquares);
   pickedColor = pickColor();
+  msg.textContent = '';
+  resetButton.textContent = 'new colors';
   colorDisplay.textContent = pickedColor;
   for (let i = 0; i < squares.length; i++) {
-    if(colors[i]){
+    if (colors[i]) {
+      squares[i].style.display = 'block';
       squares[i].style.backgroundColor = colors[i];
     } else {
       squares[i].style.display = 'none';
     }
   }
-});
-
-hardBtn.addEventListener('click', function () {
-  hardBtn.classList.add('selected');
-  easyBtn.classList.remove('selected');
-  numSquares = 6;
-  colors = genColors(numSquares);
-  pickedColor = pickColor();
-  colorDisplay.textContent = pickedColor;
-  for (let i = 0; i < squares.length; i++) {
-    squares[i].style.backgroundColor = colors[i];
-    squares[i].style.display = 'block';
-  }
-});
+  header.style.backgroundColor = 'steelblue';
+};
 
 colorDisplay.textContent = pickedColor;
 
 resetButton.addEventListener('click', function () {
-  colors = genColors(numSquares);
-  pickedColor = pickColor();
-  colorDisplay.textContent = pickedColor;
-  for (let i = 0; i < squares.length; i++) {
-    squares[i].style.backgroundColor = colors[i];
-  }
-  header.style.backgroundColor = 'steelblue';
+  reset();
 });
 
 for (var i = 0; i < colors.length; i++) {
