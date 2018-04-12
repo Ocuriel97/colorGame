@@ -48,7 +48,7 @@ resetButton.addEventListener('click', function () {
   for (let i = 0; i < squares.length; i++) {
     squares[i].style.backgroundColor = colors[i];
   }
-  header.style.backgroundColor = '#232323';
+  header.style.backgroundColor = 'steelblue';
 });
 
 for (var i = 0; i < colors.length; i++) {
